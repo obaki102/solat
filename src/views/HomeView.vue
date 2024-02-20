@@ -1,9 +1,9 @@
 <template>
   <main>
-    <div class="fullpage-container bg-gray-600">
+    <div class="fullpage-container bg-gray-100">
       <div class="flex p-12 justify-center">
         <div class="flex p-5 text-sm">
-          <TextEditor v-model="content1" />
+          <TextEditor v-model="content" />
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import TextEditor from '@/components/TextEditor.vue';
 import { ref } from 'vue';
-const content1 = ref('<p>A Vue.js wrapper component for tiptap to use <code>v-model</code>.</p>')
+const content = ref('')
 
 </script>
 <style>
