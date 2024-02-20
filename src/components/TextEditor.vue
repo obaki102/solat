@@ -118,8 +118,8 @@
         </svg>
       </button>
     </div>
-    <div>
-      <EditorContent :editor="editor" class="p-5" />
+    <div >
+      <EditorContent :editor="editor" class="m-5 rounded-lg bg-white shadow-xl"/>
     </div>
   </div>
 </template>
@@ -177,8 +177,7 @@ onBeforeUnmount(() => {
   width: 800px;
   min-height: 800px;
   background-color: #FFF;
-  border: 1px solid #0D0D0D;
-  border-radius: 0.75rem;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 5px;
