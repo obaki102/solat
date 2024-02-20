@@ -131,7 +131,7 @@ const onUpdate = () => {
 watch(modelValue, (value) => {
   // HTML
   const isSame = editor.value?.getHTML() === value;
-  
+
   // JSON
   // const isSame = JSON.stringify(editor.value?.getJSON()) === JSON.stringify(value);
 
@@ -141,6 +141,11 @@ watch(modelValue, (value) => {
 });
 
 editor.value = new Editor({
+  editorProps: {
+    attributes: {
+      class: 'prose max-w-none'
+    }
+  },
   extensions: [StarterKit,],
   content: modelValue.value,
   onUpdate,

@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import typography from '@tailwindcss/typography';
+
+
 export default {
   content: ["./index.html",
     "./src/**/*.{vue,js,ts}",],
@@ -9,6 +12,16 @@ export default {
         type: 'type 1.8s ease-out .8s 1 normal both',
         'type-reverse': 'type 1.8s ease-out 0s infinite alternate-reverse both',
       },
+      fontFamily: {
+     
+      },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-bullets': theme('colors.gray.800'),
+          },
+        },
+      }),
       keyframes: {
         type: {
           '0%': { width: '0ch' },
@@ -49,7 +62,7 @@ export default {
     },
   },
   darkMode: 'class',
-  plugins: [],
+  plugins: [typography],
 }
 
 

@@ -6,11 +6,6 @@
           <TextEditor v-model="content1" />
         </div>
       </div>
-      <ul class="list-disc list-inside">
-  <li>One</li>
-  <li>Two</li>
-  <li>Three</li>
-</ul>
     </div>
 
 
