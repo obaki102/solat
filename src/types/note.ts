@@ -1,4 +1,4 @@
-export interface TimelineItem  {
+export interface Note  {
   isOdd: boolean;
   date: Date;
   name: string;

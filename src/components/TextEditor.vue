@@ -157,11 +157,17 @@ editor.value = new Editor({
       class: 'prose max-w-none '
     },
     // handleKeyDown: (view, event) => {
-    //   if (event.key === 'Enter') {
-    //     editor.value?.commands.setHardBreak()
+    //   if (event.shiftKey && event.key === 'Enter') {
+    //     console.log('Shift Enter');
     //     return true;
     //   }
-    // },
+
+    //   if (event.key === 'Enter') {
+    //     console.log('Enter');
+    //     editor.value?.commands.setHardBreak();
+    //     return true;
+    //   }
+    // }
   },
   extensions: [StarterKit],
   content: modelValue.value,
