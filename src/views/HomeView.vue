@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import TextEditor from '@/components/TextEditor.vue';
+import ThemeToggle from '@/components/ThemeToggle.vue';
 import { ref } from 'vue';
 const content = ref('')
 

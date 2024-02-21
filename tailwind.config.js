@@ -13,7 +13,16 @@ export default {
         'type-reverse': 'type 1.8s ease-out 0s infinite alternate-reverse both',
       },
       fontFamily: {
-     
+        mono: ['Menlo', 'Monaco', 'Courier New', 'monospace'],
+      },
+      fontSize: {
+        'sm': '0.775rem', 
+
+      },
+      colors: {
+        gray: {
+          '900': '#1E293B',
+        }
       },
       typography: ({ theme }) => ({
         DEFAULT: {
