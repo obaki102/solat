@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-const isDarkTheme = ref(false);
+const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
   isDarkTheme.value = !isDarkTheme.value;

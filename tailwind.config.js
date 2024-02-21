@@ -20,8 +20,10 @@ export default {
 
       },
       colors: {
-        gray: {
-          '900': '#1E293B',
+        black: {
+          default:'#1E1E1E',
+          lighter: '#161B22',
+          dark: '#0D1117',
         }
       },
       typography: ({ theme }) => ({
