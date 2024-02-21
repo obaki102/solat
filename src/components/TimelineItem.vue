@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="text-gray-600">
-          {{ note.content }}
+          <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="text-gray-600">
-          {{ note.content }}
+          <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>
     </div>
@@ -63,13 +63,13 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import type { Note } from '../types/note';
-
+import DOMPurify from 'dompurify';
 
 defineProps<{
   note: Note;
 }>();
 
-function formatDate(date: Date) {
+const formatDate = (date: Date) => {
   const day = date.getDate();
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -81,8 +81,14 @@ function formatDate(date: Date) {
   return {
     day,
     month
-  };
+  }
 }
+
+const sanitizedHtml = (html: string) => {
+  return DOMPurify.sanitize(html);
+};
+
+
 </script>
 
 <style>
