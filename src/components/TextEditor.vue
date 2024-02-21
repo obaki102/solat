@@ -128,12 +128,6 @@
 import { ref, watch, onBeforeUnmount, defineProps, defineEmits } from 'vue';
 import StarterKit from '@tiptap/starter-kit';
 import { Editor, EditorContent } from '@tiptap/vue-3';
-import Document from '@tiptap/extension-document';
-import Paragraph from '@tiptap/extension-paragraph';
-import Text from '@tiptap/extension-text';
-import FontStyle from '@tiptap/extension-text-style';
-import FontFamily from '@tiptap/extension-font-family';
-
 
 const props = defineProps(['modelValue']);
 const emits = defineEmits(['update:modelValue']);
@@ -164,13 +158,15 @@ editor.value = new Editor({
     attributes: {
       class: 'prose max-w-none '
     },
+    handleKeyDown: (view, event) => {
+      if (event.key === 'Enter') {
+        editor.value?.commands.setHardBreak()
+        return true;
+      }
+      return false;
+    },
   },
-  extensions: [StarterKit,
-    Document,
-    Paragraph,
-    Text,
-    FontStyle,
-    FontFamily,],
+  extensions: [StarterKit],
   content: modelValue.value,
   onUpdate,
 });
