@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col">
+    <div class="flex flex-col max-w-container">
       <div v-if="editor"
         class="max-t-container bg-white dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 border-t border-l border-r rounded-tl-2xl rounded-tr-2xl border-b  border-gray-800 p-4">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
@@ -140,18 +140,11 @@ const modelValue = ref<string>(props.modelValue);
 const editor = ref<Editor>();
 
 const onUpdate = () => {
-  // HTML
   emits('update:modelValue', editor.value?.getHTML());
-  // JSON
-  // emits('update:modelValue', editor.value?.getJSON());
 };
 
 watch(modelValue, (value) => {
-  // HTML
   const isSame = editor.value?.getHTML() === value;
-
-  // JSON
-  // const isSame = JSON.stringify(editor.value?.getJSON()) === JSON.stringify(value);
 
   if (!isSame) {
     editor.value?.commands.setContent(value, false);
@@ -163,13 +156,12 @@ editor.value = new Editor({
     attributes: {
       class: 'prose max-w-none '
     },
-    handleKeyDown: (view, event) => {
-      if (event.key === 'Enter') {
-        editor.value?.commands.setHardBreak()
-        return true;
-      }
-      return false;
-    },
+    // handleKeyDown: (view, event) => {
+    //   if (event.key === 'Enter') {
+    //     editor.value?.commands.setHardBreak()
+    //     return true;
+    //   }
+    // },
   },
   extensions: [StarterKit],
   content: modelValue.value,
@@ -184,19 +176,34 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 .tiptap {
-  max-width: 825px;
-  width: 100%;
+  max-width: 810px;
   margin: 0 auto;
   min-height: 370px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   color: #333;
   background-color: #FFF;
   font-size: 0.875rem;
+
+  pre {
+    background: #0D0D0D;
+    color: #FFF;
+
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
 }
 
 .max-w-container {
   max-width: 830px;
-  min-height: 369px;
+  min-height: 370px;
   height: 100%;
   background-color: #FFF;
 }

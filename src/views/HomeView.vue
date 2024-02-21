@@ -1,8 +1,9 @@
 <template>
   <main>
-    <div class="fullpage-container bg-gray-100 flex items-center justify-center">
+    <div class="fullpage-container bg-white  justify-center">
       <TextEditor v-model="content" />
     </div>
+    
   </main>
 </template>
 
