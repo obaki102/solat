@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="bg-white">
+    <div class="main-background">
       <div class="flex justify-center">
         <div class="w-2/3 mx-auto">
 
@@ -18,7 +18,7 @@
           <div v-for="(item, index) in timelineItems" :key="index">
             <TimelineItem :note=item></TimelineItem>
           </div>
-          <!-- <TextEditor v-model="content"></TextEditor> -->
+          <TextEditor v-model="content"></TextEditor>
 
         </div>
       </div>
@@ -81,4 +81,9 @@ timelineItems.value = [timelineItem1, timelineItem2, timelineItem3, timelineItem
 </script>
 
 
-../types/note
+<style>
+.main-background{
+
+  background-color: #F8FAFC;
+}
+</style>

@@ -2,17 +2,17 @@
   <!-- LEFT-->
   <div class="flex flex-row w-full" v-if="note.isOdd">
     <div class="w-2/5 px-2 py-10">
-      <div class="flex flex-col w-full rounded-lg border border-gray-800 bg-white px-4 py-5">
+      <div class="flex flex-col w-full text-gray-700 bg-white shadow-md bg-clip-border rounded-xl px-4 py-5">
         <div class="text-gray-600 mb-2 flex justify-between">
           <div class="font-bold">
             {{ note.name }}
           </div>
-          <div class="flex flex-row">
+          <!-- <div class="flex flex-row">
             <button class="text-blue-500 mr-2 hover:text-blue-300 transition duration-200"><i
                 class="far fa-edit"></i></button>
             <button class="text-red-500 hover:text-red-300 transition duration-200"><i
                 class="far fa-trash-alt"></i></button>
-          </div>
+          </div> -->
         </div>
         <div class="text-gray-600">
           <span v-html="sanitizedHtml(note.content)"></span>
@@ -20,9 +20,9 @@
       </div>
     </div>
     <div class="w-1/5  flex justify-center">
-      <div class="relative flex h-full w-1 bg-green-300 items-center justify-center">
+      <div class="relative flex h-full w-1 bg-blue-300 items-center justify-center">
         <div
-          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-green-300 leading-none text-center z-10 bg-white font-thin">
+          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin ">
           <div>{{ formatDate(note.date).day }}</div>
           <div>{{ formatDate(note.date).month }}</div>
         </div>
@@ -37,16 +37,16 @@
     <div class="w-2/5 px-2 py-10">
     </div>
     <div class="w-1/5  flex justify-center">
-      <div class="relative flex h-full w-1 bg-green-300 items-center justify-center">
+      <div class="relative flex h-full w-1 bg-blue-300 items-center justify-center">
         <div
-          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-green-300 leading-none text-center z-10 bg-white font-thin">
+          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin">
           <div>{{ formatDate(note.date).day }}</div>
           <div>{{ formatDate(note.date).month }}</div>
         </div>
       </div>
     </div>
     <div class="w-2/5 px-2 py-10 ">
-      <div class="flex flex-col w-full rounded-lg border bg-white px-4 py-5">
+      <div class="flex flex-col w-full text-gray-700 bg-white shadow-md bg-clip-border rounded-xl px-4 py-5">
         <div class="text-gray-600 mb-2 flex justify-between">
           <div class="font-bold">
             {{ note.name }}

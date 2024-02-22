@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="flex flex-col max-w-container">
+    <div class="flex flex-col max-w-container bg-white shadow-md bg-clip-border rounded-xl p-4">
       <div v-if="editor"
-        class="max-t-container bg-white dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 border-t border-l border-r rounded-tl-2xl rounded-tr-2xl border-b  border-gray-800 p-4">
+        class="max-t-container bg-white dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
           class="flex hover:bg-gray-300 p-1 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@
           </svg>
         </button>
       </div>
-      <div class="max-w-container w-full border-l border-r rounded-bl-2xl rounded-br-2xl border-b border-gray-800 p-2">
+      <div class="max-w-container  p-2">
         <EditorContent :editor="editor" class="bg-gray-100" />
       </div>
     </div>
@@ -211,7 +211,6 @@ onBeforeUnmount(() => {
   max-width: 830px;
   min-height: 370px;
   height: 100%;
-  background-color: #FFF;
 }
 
 .max-t-container {
