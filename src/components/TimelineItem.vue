@@ -25,6 +25,7 @@
           class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin ">
           <div>{{ formatDate(note.date).day }}</div>
           <div>{{ formatDate(note.date).month }}</div>
+          <div>{{ formatDate(note.date).time }}</div>
         </div>
       </div>
     </div>
@@ -42,6 +43,7 @@
           class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin">
           <div>{{ formatDate(note.date).day }}</div>
           <div>{{ formatDate(note.date).month }}</div>
+          <div>{{ formatDate(note.date).time }}</div>
         </div>
       </div>
     </div>
@@ -78,11 +80,19 @@ const formatDate = (date: Date) => {
   const monthIndex = date.getMonth();
   const month = monthNames[monthIndex];
 
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  const amOrPm = hours >= 12 ? 'PM' : 'AM';
+  const formattedHours = hours % 12 || 12; 
+
   return {
     day,
-    month
-  }
-}
+    month,
+    time: `${formattedHours}:${minutes}:${seconds} ${amOrPm}`
+  };
+};
 
 const sanitizedHtml = (html: string) => {
   return DOMPurify.sanitize(html);

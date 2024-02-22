@@ -1,25 +1,16 @@
 <template>
   <main>
+    <!-- Use the Modal component -->
+    <button @click="showModal = true">Show modal</button>
+    <ModalWindow v-model="showModal" />
+
     <div class="main-background">
       <div class="flex justify-center">
+
         <div class="w-2/3 mx-auto">
-
-          <!-- <TimelineItem :isOdd="false" />
-          <TimelineItem :isOdd="false" />
-          <TimelineItem :isOdd="false" />
-          <TimelineItem :isOdd="true" />
-          <TimelineItem :isOdd="false" />
-          <TimelineItem :isOdd="false" />
-          <TimelineItem :isOdd="true" />
-          <TimelineItem :isOdd="true" />
-          <TimelineItem :isOdd="true" />
-          <TimelineItem :isOdd="true" /> -->
-
           <div v-for="(item, index) in timelineItems" :key="index">
             <TimelineItem :note=item></TimelineItem>
           </div>
-          <TextEditor v-model="content"></TextEditor>
-
         </div>
       </div>
     </div>
@@ -27,11 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import TextEditor from '@/components/TextEditor.vue';
+
 import TimelineItem from '@/components/TimelineItem.vue';
+import ModalWindow from '@/components/ModalWindow.vue';
 import { ref } from 'vue';
 import type { Note } from '../types/note';
-const content = ref('');
+
+const showModal = ref(false);
+
 
 
 // Dummy data
@@ -57,7 +51,7 @@ const timelineItem1: Note = {
 
 const timelineItem2: Note = {
   isOdd: false,
-  date: new Date('2022-02-22'),
+  date: new Date('2022-02-21'),
   name: 'Jane Doe',
   content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };
@@ -82,8 +76,19 @@ timelineItems.value = [timelineItem1, timelineItem2, timelineItem3, timelineItem
 
 
 <style>
-.main-background{
+.main-background {
 
   background-color: #F8FAFC;
+}
+
+* Add your custom styles here if needed */ .custom-modal {
+  background-color: lightblue;
+  /* Add any other custom styles for the modal container */
+}
+
+.custom-close-button {
+  background-color: red;
+  color: white;
+  /* Add any other custom styles for the close button */
 }
 </style>
