@@ -14,7 +14,7 @@
                 class="far fa-trash-alt"></i></button>
           </div> -->
         </div>
-        <div class="text-gray-600">
+        <div class="text-gray-600 flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify">
           <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>
@@ -54,7 +54,7 @@
             {{ note.name }}
           </div>
         </div>
-        <div class="text-gray-600">
+        <div class="text-gray-600 flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify">
           <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>

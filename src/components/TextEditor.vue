@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col max-w-container bg-white  bg-clip-border rounded-xl p-4">
-      <div class="max-w-container  p-2">
+      <div class="max-w-container  bg-white border border-slate-200 rounded-xl p-2 mb-2">
         <EditorContent :editor="editor" class="bg-gray-100" />
       </div>
       <div v-if="editor"
@@ -190,7 +190,7 @@ onBeforeUnmount(() => {
   color: #333;
   background-color: #FFF;
   font-size: 0.875rem;
-
+  
   pre {
     background: #0D0D0D;
     color: #FFF;
@@ -204,6 +204,7 @@ onBeforeUnmount(() => {
       padding: 0;
       background: none;
       font-size: 0.8rem;
+      margin: 1;
     }
   }
 }

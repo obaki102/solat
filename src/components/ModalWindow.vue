@@ -8,14 +8,18 @@
         class="w-11/12 lg:w-full max-w-3xl z-20 mx-auto bg-white flex flex-col relative self-center shadow-2xl rounded-md ">
 
         <!-- Modal body -->
-        <TextEditor></TextEditor>
+        <TextEditor v-model="noteContent" />
         <!-- ./Modal body -->
 
         <!-- Modal footer -->
         <div class="p-6 flex justify-end">
-          <button @click="emits('update:modelValue', false)"
+          <button @click="emit('update:modelValue', false)"
             class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
             Modal</button>
+
+          <button @click="addNote"
+            class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+            Add Note</button>
         </div>
         <!-- ./Modal footer -->
       </div>
@@ -34,15 +38,32 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue';
 import TextEditor from '@/components/TextEditor.vue';
-const emits = defineEmits(['update:modelValue']);
+import type { Note } from '../types/note';
+import { v4 as uuidv4 } from 'uuid';
+
+const noteContent = ref<string>();
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false
   }
 })
+const emit = defineEmits(['update:modelValue', 'addNote']);
+const addNote = () => {
+  const uniqueId = uuidv4();
+  const newNote: Note = {
+    id:uniqueId,
+    isOdd: true,
+    date: new Date(),
+    name: 'John Doe',
+    content: noteContent.value as string,
+  };
+  emit('addNote', newNote);
+  emit('update:modelValue', false);
+
+}
 
 </script>
 
@@ -60,6 +81,5 @@ const props = defineProps({
   align-items: center;
   z-index: 50;
   overflow-y: auto;
-  /* Enable vertical scrolling */
 }
 </style>
