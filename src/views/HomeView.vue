@@ -1,15 +1,15 @@
 <template>
   <main>
     <!-- Use the Modal component -->
-    <button @click="showModal = true">Show modal</button>
+    <button @click="showModal = true">Add Note</button>
     <ModalWindow v-model="showModal" @addNote="handleAddItem" />
 
     <div class="main-background">
       <div class="flex justify-center">
 
         <div class="w-2/3 mx-auto">
-          <div v-for="(item, index) in timelineItems" :key="index">
-            <TimelineItem :note=item></TimelineItem>
+          <div v-for="(item, index) in timelineItems.slice().sort((a, b) => b.date.getTime()  - a.date.getTime())" :key="index">
+            <TimelineItem :note=item :isOdd="index % 2 !== 0"></TimelineItem>
           </div>
         </div>
       </div>
@@ -46,13 +46,15 @@ watchEffect(() => {
 const handleAddItem = (newItem: Note) => {
   timelineItems.push(newItem);
 };
+
 </script>
 
 
 <style>
 .main-background {
-
-  background-color: #F8FAFC;
+  background-color: #e0e0e0; /* Set your desired background color */
+  min-height: 100vh; /* Ensure the background covers the entire viewport height */
+  
 }
 
 * Add your custom styles here if needed */ .custom-modal {

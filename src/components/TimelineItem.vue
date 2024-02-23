@@ -1,6 +1,6 @@
 <template>
   <!-- LEFT-->
-  <div class="flex flex-row w-full" v-if="note.isOdd">
+  <div class="flex flex-row w-full" v-if="isOdd">
     <div class="w-2/5 px-2 py-10">
       <div class="flex flex-col w-full text-gray-700 bg-white shadow-md bg-clip-border rounded-xl px-4 py-5">
         <div class="text-gray-600 mb-2 flex justify-between">
@@ -34,7 +34,7 @@
   </div>
 
   <!-- RIGHT-->
-  <div class="flex flex-row w-full" v-if="!note.isOdd">
+  <div class="flex flex-row w-full" v-if="!isOdd">
     <div class="w-2/5 px-2 py-10">
     </div>
     <div class="w-1/5  flex justify-center">
@@ -68,7 +68,8 @@ import type { Note } from '../types/note';
 import DOMPurify from 'dompurify';
 
 defineProps<{
-  note: Note;
+  note: Note,
+  isOdd: boolean;
 }>();
 
 const formatDate = (date: Date) => {

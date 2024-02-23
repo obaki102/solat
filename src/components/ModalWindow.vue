@@ -55,13 +55,13 @@ const addNote = () => {
   const uniqueId = uuidv4();
   const newNote: Note = {
     id:uniqueId,
-    isOdd: true,
     date: new Date(),
-    name: 'John Doe',
+    name: '',
     content: noteContent.value as string,
   };
   emit('addNote', newNote);
   emit('update:modelValue', false);
+  noteContent.value = '';
 
 }
 
