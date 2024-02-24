@@ -5,22 +5,22 @@
     <ModalWindow v-model="showModal" @addNote="handleAddItem" />
 
     <div class="main-background">
-      <div class="flex justify-center">
-
-        <div class="w-2/3 mx-auto">
-          <div v-for="(item, index) in timelineItems.slice().sort((a, b) => b.date.getTime()  - a.date.getTime())" :key="index">
-            <TimelineItem :note=item :isOdd="index % 2 !== 0"></TimelineItem>
-          </div>
+      <div class="flex flex-col items-center">
+        <div  v-for="(item, index) in timelineItems.slice().sort((a, b) => b.date.getTime() - a.date.getTime())"
+          :key="index">
+          <NoteItem :note=item></NoteItem>
         </div>
       </div>
     </div>
+
   </main>
 </template>
 
 <script setup lang="ts">
 import TimelineItem from '@/components/TimelineItem.vue';
+import NoteItem from '@/components/NoteItem.vue';
 import ModalWindow from '@/components/ModalWindow.vue';
-import {reactive, ref, watchEffect } from 'vue';
+import { reactive, ref, watchEffect } from 'vue';
 import type { Note } from '../types/note';
 
 const showModal = ref(false);
@@ -40,7 +40,7 @@ const useLocalStorage = (key: string): Note[] => {
 const timelineItems = reactive<Note[]>(useLocalStorage('timelineItems'));
 
 watchEffect(() => {
-   localStorage.setItem('timelineItems', JSON.stringify(timelineItems));
+  localStorage.setItem('timelineItems', JSON.stringify(timelineItems));
 });
 
 const handleAddItem = (newItem: Note) => {
@@ -52,14 +52,14 @@ const handleAddItem = (newItem: Note) => {
 
 <style>
 .main-background {
-  background-color: #e0e0e0; /* Set your desired background color */
-  min-height: 100vh; /* Ensure the background covers the entire viewport height */
-  
+  background-color: #e0e0e0;
+  min-height: 100vh;
+
 }
 
 * Add your custom styles here if needed */ .custom-modal {
   background-color: lightblue;
-  /* Add any other custom styles for the modal container */
+
 }
 
 .custom-close-button {

@@ -14,7 +14,7 @@
                 class="far fa-trash-alt"></i></button>
           </div> -->
         </div>
-        <div class="text-gray-600 flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify">
+        <div class="text-gray-600 flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify ">
           <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>
@@ -22,7 +22,7 @@
     <div class="w-1/5  flex justify-center">
       <div class="relative flex h-full w-1 bg-blue-300 items-center justify-center">
         <div
-          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin ">
+          class="absolute flex flex-col justify-center h-24 w-24 rounded-full border-2 border-blue-300 leading-none text-center z-10 bg-white font-thin gap-y-2">
           <div>{{ formatDate(note.date).day }}</div>
           <div>{{ formatDate(note.date).month }}</div>
           <div>{{ formatDate(note.date).time }}</div>
@@ -83,7 +83,6 @@ const formatDate = (date: Date) => {
 
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
 
   const amOrPm = hours >= 12 ? 'PM' : 'AM';
   const formattedHours = hours % 12 || 12; 
@@ -91,7 +90,7 @@ const formatDate = (date: Date) => {
   return {
     day,
     month,
-    time: `${formattedHours}:${minutes}:${seconds} ${amOrPm}`
+    time: `${formattedHours}:${minutes} ${amOrPm}`
   };
 };
 
