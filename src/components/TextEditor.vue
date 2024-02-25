@@ -191,6 +191,9 @@ onBeforeUnmount(() => {
   color: #333;
   background-color: #FFF;
   font-size: 0.875rem;
+  max-height: 800px; /* You can adjust this value as needed */
+  overflow-y: auto;
+
   
   pre {
     background: #0D0D0D;
