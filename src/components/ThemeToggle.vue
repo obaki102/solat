@@ -1,7 +1,10 @@
 <template>
-  <div @click="toggleTheme" class="cursor-pointer p-4">
-    Toggle Theme
-  </div>
+  <button @click="toggleTheme" class="cursor-pointer p-4">
+    <span v-if="isDarkTheme">🌙</span>
+    <span v-if="!isDarkTheme">☀️</span>
+    <label for="checkbox" class="switch-label">
+    </label>
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -24,5 +27,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

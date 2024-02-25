@@ -1,8 +1,9 @@
 <template>
  
-    <div class="flex px-2 py-2" v-show="note">
-      <div class="flex flex-col fixed-width text-gray-700 bg-white shadow-md bg-clip-border rounded-xl px-4 py-5">
-        <div class="flex text-gray-600 mb-2 flex justify-between">
+    <div class="flex px-2 py-1 transition duration-300 hover:scale-105" v-show="note">
+      <div class="flex flex-col fixed-width text-gray-700 dark:text-gray-100 bg-white  dark:bg-slate-900 border bg-clip-border
+        dark:border-slate-200 rounded-xl px-4 py-5">
+        <div class="flex  mb-2 flex justify-between">
           <div class="font-bold">
             {{ formatTimeAgo(note.date).timeAgo }}
           </div>
@@ -14,7 +15,7 @@
           </div> -->
         </div>
         <div
-          class="text-gray-600 flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify ">
+          class="flex flex-wrap max-w-screen-md max-h-48 overflow-hidden overflow-ellipsis text-ellipsis text-justify ">
           <span v-html="sanitizedHtml(note.content)"></span>
         </div>
       </div>
@@ -65,4 +66,5 @@ const sanitizedHtml = (html: string) => {
 .fixed-width {
   width: 720px;
 }
+
 </style>

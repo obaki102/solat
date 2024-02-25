@@ -2,12 +2,15 @@
   <main>
     <!-- Use the Modal component -->
     <button @click="showModal = true">Add Note</button>
-    <ModalWindow v-model="showModal" @addNote="handleAddItem" />
+    <transition enter-active-class="transition duration-1000" enter-from-class="opacity-0"
+      enter-to-class="opacity-100 bounceIn-effect ">
+      <ModalWindow v-model="showModal" @addNote="handleAddItem" />
+    </transition>
 
-    <div class="main-background">
+    <div class="bg-white dark:bg-slate-950">
       <div class="flex flex-col items-center">
-        <div  v-for="(item, index) in timelineItems.slice().sort((a, b) => b.date.getTime() - a.date.getTime())"
-          :key="index">
+        <div class="card-wrapper"
+          v-for="(item, index) in timelineItems.slice().sort((a, b) => b.date.getTime() - a.date.getTime())" :key="index">
           <NoteItem :note=item></NoteItem>
         </div>
       </div>
@@ -17,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import TimelineItem from '@/components/TimelineItem.vue';
+import ThemeToggle from '@/components/ThemeToggle.vue';
 import NoteItem from '@/components/NoteItem.vue';
 import ModalWindow from '@/components/ModalWindow.vue';
 import { reactive, ref, watchEffect } from 'vue';
@@ -65,6 +68,28 @@ const handleAddItem = (newItem: Note) => {
 .custom-close-button {
   background-color: red;
   color: white;
-  /* Add any other custom styles for the close button */
-}
-</style>
+
+  .bounceIn-effect {
+    animation: bounceIn 1s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+
+  @keyframes bounceIn {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+
+    40% {
+      transform: translateY(-40px);
+    }
+
+    60% {
+      transform: translateY(-20px);
+    }
+  }
+
+}</style>

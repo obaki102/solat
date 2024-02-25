@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="flex flex-col max-w-container bg-white  bg-clip-border rounded-xl p-4">
-      <div class="max-w-container  bg-white border border-slate-200 rounded-xl p-2 mb-2">
+    <div class="flex flex-col max-w-container bg-white dark:bg-slate-800  bg-clip-border rounded-xl p-4">
+      <div class="max-w-container dark:bg-slate-800 border border-slate-200 rounded-xl p-2 mb-2">
         <EditorContent :editor="editor" class="bg-gray-100" />
       </div>
       <div v-if="editor"
-        class="max-t-container bg-white dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4">
+        class="max-t-container dark:bg-slate-800 dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
           class="flex hover:bg-gray-300 p-1 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -133,6 +133,7 @@
 <script setup lang="ts">
 import { ref, watch, onBeforeUnmount, defineProps, defineEmits } from 'vue';
 import StarterKit from '@tiptap/starter-kit';
+import Typography from '@tiptap/extension-typography'
 import { Editor, EditorContent } from '@tiptap/vue-3';
 
 const props = defineProps(['modelValue']);
@@ -170,7 +171,7 @@ editor.value = new Editor({
     //   }
     // }
   },
-  extensions: [StarterKit],
+  extensions: [StarterKit,Typography],
   content: modelValue.value,
   onUpdate,
 });
