@@ -1,58 +1,68 @@
 <template>
-  <div v-if="props.modelValue" class="modal-overlay">
+  <div v-if="modal.showModal" class="modal-overlay">
     <div class="flex items-center justify-center absolute h-screen top-0 left-0"></div>
-         <!-- Modal -->
-      <div v-if="props.modelValue"
-        class="w-11/12 lg:w-full max-w-3xl z-20 mx-auto bg-white flex flex-col relative self-center shadow-2xl rounded-md ">
+    <!-- Modal -->
+    <div
+      class="w-11/12 lg:w-full max-w-3xl z-20 mx-auto bg-white flex flex-col relative self-center shadow-2xl rounded-md ">
 
-        <!-- Modal body -->
-        <TextEditor v-model="noteContent" />
-        <!-- ./Modal body -->
+      <!-- Modal body -->
+      <TextEditor v-model="noteContent" />
+      <!-- ./Modal body -->
 
-        <!-- Modal footer -->
-        <div class="p-6 flex justify-end">
-          <button @click="closeModal"
-            class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
-            Modal</button>
+      <!-- Modal footer -->
+      <div class="p-6 flex justify-end">
+        <button @click="closeModal"
+          class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
+          Modal</button>
 
-          <button @click="addNote"
-            class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
-            Add Note</button>
-        </div>
-        <!-- ./Modal footer -->
+        <button @click="addNote" v-if="!modal.IsforEdit"
+          class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+          Add Note</button>
+        <button @click="editNote" v-if="modal.IsforEdit"
+          class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+          Save Changes</button>
       </div>
+      <!-- ./Modal footer -->
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue';
+import { defineProps, defineEmits, ref, reactive } from 'vue';
 import TextEditor from '@/components/TextEditor.vue';
 import type { Note } from '../types/note';
+import type { Modal } from '../types/modalType';
 import { v4 as uuidv4 } from 'uuid';
 
-const noteContent = ref<string>();
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
-const emit = defineEmits(['update:modelValue', 'addNote']);
+const { modal } = defineProps<{ modal: Modal }>();
+const modalVal = reactive<Modal>(modal);
+const noteContent = ref<string>(modal.note.content);
+
+
+const emit = defineEmits(['closeModal', 'addNote', 'editNote']);
 const addNote = () => {
   const uniqueId = uuidv4();
   const newNote: Note = {
-    id:uniqueId,
+    id: uniqueId,
     date: new Date(),
     name: '',
     content: noteContent.value as string,
   };
+
   emit('addNote', newNote);
-  closeModal;
+  closeModal();
+
+}
+
+const editNote = () => {
+  modalVal.note.content = noteContent.value;
+  emit('editNote', modalVal);
+  closeModal();
 }
 const closeModal = () => {
-  emit('update:modelValue', false);
+  modalVal.showModal = false;
+  emit('closeModal', modalVal);
   noteContent.value = '';
-
 };
 
 </script>
