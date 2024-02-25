@@ -1,11 +1,8 @@
 <template>
   <div>
     <div class="flex flex-col max-w-container bg-white dark:bg-slate-800  bg-clip-border rounded-xl p-4">
-      <div class="max-w-container dark:bg-slate-800 border border-slate-200 rounded-xl p-2 mb-2">
-        <EditorContent :editor="editor" class="bg-gray-100" />
-      </div>
       <div v-if="editor"
-        class="max-t-container dark:bg-slate-800 dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4">
+        class="max-t-container dark:bg-slate-800 dark:bg-black-lighter buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4 mb-2">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
           class="flex hover:bg-gray-300 p-1 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -125,7 +122,9 @@
           </svg>
         </button>
       </div>
-     
+      <div class="max-w-container dark:bg-slate-800 border border-slate-200 rounded-xl p-2">
+        <EditorContent :editor="editor" class="bg-gray-100" />
+      </div>
     </div>
   </div>
 </template>
@@ -171,7 +170,7 @@ editor.value = new Editor({
     //   }
     // }
   },
-  extensions: [StarterKit,Typography],
+  extensions: [StarterKit, Typography],
   content: modelValue.value,
   onUpdate,
 });
@@ -191,10 +190,11 @@ onBeforeUnmount(() => {
   color: #333;
   background-color: #FFF;
   font-size: 0.875rem;
-  max-height: 800px; /* You can adjust this value as needed */
+  max-height: 800px;
+  /* You can adjust this value as needed */
   overflow-y: auto;
 
-  
+
   pre {
     background: #0D0D0D;
     color: #FFF;

@@ -1,7 +1,7 @@
 <template>
  
     <div class="flex px-2 py-1 transition duration-300 hover:scale-105" v-show="note">
-      <div class="flex flex-col fixed-width text-gray-700 dark:text-gray-105 bg-white  dark:bg-slate-900 border hover:border-2 hover:shadow-sm bg-clip-border
+      <div class="flex flex-col max-md:w-96 md:w-720 text-gray-700 dark:text-gray-105 bg-white  dark:bg-slate-900 border hover:border-2 hover:shadow-sm bg-clip-border
         dark:border-slate-200 rounded-xl px-4 py-5">
         <div class="flex  mb-2 flex justify-between">
           <div class="font-bold">

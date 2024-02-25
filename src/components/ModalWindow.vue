@@ -10,17 +10,17 @@
       <!-- ./Modal body -->
 
       <!-- Modal footer -->
-      <div class="p-6 flex justify-end">
+      <div class="pb-4  pr-3  flex justify-end">
         <button @click="closeModal"
-          class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
-          Modal</button>
+          class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
+        </button>
 
         <button @click="addNote" v-if="!modal.IsforEdit"
-          class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+          class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
           Add Note</button>
         <button @click="editNote" v-if="modal.IsforEdit"
-          class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
-          Save Changes</button>
+          class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+          Save Note</button>
       </div>
       <!-- ./Modal footer -->
     </div>

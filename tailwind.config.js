@@ -47,7 +47,10 @@ export default {
           '85%, 90%': { width: '9ch' },
           '95%': { width: '10ch' },
         }
-      }
+      },
+      width: { 
+        '720': '720px', 
+    }, 
     },
     screens: {
       'sm': '700px',
