@@ -1,38 +1,38 @@
 <template>
   <main>
-    <div class="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300 text-gray-800 py-6 text-center">
-      <h1 class="text-3xl font-semibold tracking-tight">Surat</h1>
-      <p class="mt-2 text-sm">If you can think it, you can 'surat' it.</p>
-    </div>
-    <div class="flex flex-row items-center justify-center p-2">
-      <div>
-        <div class="flex flex-col max-w-720 md:w-720 max-md:w-96 m-h-screen">
-          <div
-            class="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-2 mb-5 sticky hover:border-2"
-            style="top: 5px">
-            <input v-model="searchTerm"
-              class="font-bold  rounded-full w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
-              type="text" placeholder="Search notes...">
+    <div class="flex items-center bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300 text-gray-800 h-24 mb-5">
+      <h1 class="text-3xl font-semibold tracking-tight ml-10 custom-font">Surat</h1>
+      <div class="flex items-center justify-center flex-grow">
+        <div class="flex flex-col max-w-720 md:w-720 max-md:w-96">
+          <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden hover:shadow-md transition duration-300 hover:scale-105">
+            <div class="grid place-items-center h-full w-12 text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input v-model="searchTerm" class="peer h-full w-full outline-none text-sm text-gray-700 pr-2" type="text"
+              id="search" placeholder="Search notes..." />
           </div>
         </div>
       </div>
+      <div class="flex items-center justify-end p-2">
+        <div class="p-5">
+          <button class="m-5 hover:scale-110" @click="openModal(false)">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 24 24">
+              <title>Add Note</title>
+              <path
+                d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-
-    <div class="fixed top-0 right-0 p-5 transform translate-y-0">
-      <button class="m-5 hover:scale-110" @click="openModal(false)">
-        <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 24 24">
-          <title>Add Note</title>
-          <path
-            d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" />
-        </svg>
-      </button>
-    </div>
-
     <transition enter-active-class="transition-transform duration-500 ease-out" enter-from-class="scale-0 opacity-0"
       enter-to-class="scale-100 opacity-100">
       <ModalWindow :modal="modal" @handleNote="handleNote" @closeModal="closeModal" :key="modal.id" />
     </transition>
-
     <div class="bg-white dark:bg-slate-950">
       <div class="flex flex-col items-center">
         <div v-for="(item, index) in sortedNotes" :key="index" @click="openModal(true, item)">
@@ -40,7 +40,6 @@
         </div>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -130,7 +129,9 @@ const sortedNotes = computed(() => {
   background-color: red;
   color: white;
 
+}
 
-
+.custom-font {
+  font-family: 'SnellRoundhand', cursive;
 }
 </style>
