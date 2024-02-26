@@ -16,12 +16,12 @@ export default {
         mono: ['Menlo', 'Monaco', 'Courier New', 'monospace'],
       },
       fontSize: {
-        'sm': '0.775rem', 
+        'sm': '0.775rem',
 
       },
       colors: {
         black: {
-          default:'#1E1E1E',
+          default: '#1E1E1E',
           lighter: '#161B22',
           dark: '#0D1117',
         }
@@ -48,9 +48,12 @@ export default {
           '95%': { width: '10ch' },
         }
       },
-      width: { 
-        '720': '720px', 
-    }, 
+      width: {
+        '720': '720px',
+      }, 
+      maxWidth: {
+        '720': '720px',
+      },
     },
     screens: {
       'sm': '700px',

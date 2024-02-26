@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import type { Note } from '../types/note';
 import DOMPurify from 'dompurify';
 

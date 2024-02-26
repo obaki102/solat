@@ -1,8 +1,9 @@
 <template>
   <div v-if="modal.showModal" class="modal-overlay">
-    <div class="flex items-center justify-center absolute h-screen top-0 left-0"></div>
     <!-- Modal -->
-    <div
+    <transition enter-active-class="transition-all duration-500 ease-out" enter-from-class="scale-75 opacity-0"
+      enter-to-class="scale-100 opacity-100" >
+    <div v-show="modal.showModal"
       class="w-11/12 lg:w-full max-w-3xl z-20 mx-auto bg-white flex flex-col relative self-center shadow-2xl rounded-md ">
 
       <!-- Modal body -->
@@ -24,11 +25,12 @@
       </div>
       <!-- ./Modal footer -->
     </div>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import TextEditor from '@/components/TextEditor.vue';
 import type { Note } from '../types/note';
 import type { Modal } from '../types/modalType';
@@ -75,7 +77,6 @@ const closeModal = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
