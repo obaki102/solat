@@ -57,6 +57,7 @@ const addNote = () => {
 }
 
 const editNote = () => {
+  modalVal.note.date   = new Date();
   modalVal.note.content = noteContent.value;
   emit('editNote', modalVal);
   closeModal();
