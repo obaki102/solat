@@ -7,7 +7,8 @@
     <div class="flex flex-row items-center justify-center p-2">
       <div>
         <div class="flex flex-col max-w-720 md:w-720 max-md:w-96 m-h-screen">
-          <div class="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-2 mb-5 sticky hover:border-2" 
+          <div
+            class="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-2 mb-5 sticky hover:border-2"
             style="top: 5px">
             <input v-model="searchTerm"
               class="font-bold  rounded-full w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
@@ -29,8 +30,7 @@
 
     <transition enter-active-class="transition-transform duration-500 ease-out" enter-from-class="scale-0 opacity-0"
       enter-to-class="scale-100 opacity-100">
-      <ModalWindow :modal="modal" @addNote="handleAddNote" @editNote="handleEditNote" @closeModal="closeModal"
-        :key="modal.id" />
+      <ModalWindow :modal="modal" @handleNote="handleNote" @closeModal="closeModal" :key="modal.id" />
     </transition>
 
     <div class="bg-white dark:bg-slate-950">
@@ -75,16 +75,18 @@ watchEffect(() => {
   localStorage.setItem('notes', JSON.stringify(notes));
 });
 
-const handleAddNote = (newItem: Note) => {
-  notes.push(newItem);
-}
-
-const handleEditNote = (editedItem: Note) => {
-  const index = notes.findIndex(item => item.id === editedItem.id);
+const handleNote = (note: Note, operation: string) => {
+  const index = notes.findIndex(item => item.id === note.id);
   if (index !== -1) {
-    notes[index] = editedItem;
+    if (operation === 'edit') {
+      notes[index] = note;
+    } else if (operation === 'delete') {
+      notes.splice(index, 1);
+    }
+  } else if (operation === 'add') {
+    notes.push(note);
   }
-}
+};
 
 const openModal = (isForEdit: boolean, noteForEdit?: Note) => {
   const uniqueId = uuidv4();
