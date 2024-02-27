@@ -19,10 +19,10 @@
             class="bg-red-400 hover:bg-red-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
             Delete Note</button>
           <button @click="addNote" v-if="!modal.IsforEdit"
-            class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+            class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
           <button @click="editNote" v-if="modal.IsforEdit"
-            class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
+            class="bg-green-400 hover:bg-green-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Save Note</button>
         </div>
         <!-- ./Modal footer -->
