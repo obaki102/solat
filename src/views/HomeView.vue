@@ -1,9 +1,9 @@
 <template>
   <main>
     <div class="flex items-center bg-gradient-to-r from-gray-200 via-gray-100 to-gray-300 text-gray-800 h-24 mb-5">
-      <h1 class="text-3xl font-semibold tracking-tight ml-10 custom-font">Surat</h1>
+      <h1 class="flex text-3xl font-semibold tracking-tight ml-5 mr-5 custom-font">Surat</h1>
       <div class="flex items-center justify-center flex-grow">
-        <div class="flex flex-col max-w-720 md:w-720 max-md:w-96">
+        <div class="flex flex-col max-w-720 md:w-96 lg:w-720 max-lg:w-auto">
           <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden hover:shadow-md transition duration-300 hover:scale-105">
             <div class="grid place-items-center h-full w-12 text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24"
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="flex items-center justify-end p-2">
-        <div class="p-5">
+        <div>
           <button class="m-5 hover:scale-110" @click="openModal(false)">
             <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 24 24">
               <title>Add Note</title>
