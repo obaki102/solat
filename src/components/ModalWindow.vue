@@ -13,7 +13,7 @@
         <!-- Modal footer -->
         <div class="pb-4  pr-3  flex justify-end">
           <button @click="closeModal"
-            class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out">Close
+            class="bg-blue-400 hover:bg-blue-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">Close
           </button>
           <button @click="deleteNote" v-if="modal.IsforEdit"
             class="bg-red-400 hover:bg-red-500 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mx-2">
