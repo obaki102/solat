@@ -4,7 +4,7 @@
     <transition enter-active-class="transition-all duration-500 ease-out" enter-from-class="scale-75 opacity-0"
       enter-to-class="scale-100 opacity-100">
       <div v-show="modal.showModal"
-        class="w-11/12 lg:w-full max-w-3xl z-20 mx-auto bg-white dark:bg-slate-700  flex flex-col relative self-center shadow-2xl rounded-md ">
+        class="w-11/12 lg:w-full max-w-3xl max-md:max-h-56 z-20 mx-auto bg-white dark:bg-slate-700  flex flex-col relative self-center shadow-2xl rounded-md ">
 
         <!-- Modal body -->
         <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight"/>
