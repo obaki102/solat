@@ -55,6 +55,7 @@ import { reactive, watchEffect, ref, computed } from 'vue';
 import type { Note } from '../types/note';
 import type { Modal } from '../types/modalType';
 import { v4 as uuidv4 } from 'uuid';
+import {getEncryptedData, setEncryptedData } from 'obaki-local-storage'
 const isDarkTheme = ref(false);
 const modal = reactive<Modal>({
   id: '',
@@ -64,19 +65,11 @@ const modal = reactive<Modal>({
   note: {} as Note
 });
 
-const dateReviver = (key: any, value: any) => {
-  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)) {
-    return new Date(value);
-  }
-  return value;
-};
-
-const useLocalStorage = (key: string): Note[] => JSON.parse(localStorage.getItem(key) || '[]', dateReviver);
-
-const notes = reactive<Note[]>(useLocalStorage('notes'));
+const decryptedData =  getEncryptedData<Note>('notes-encrypted', import.meta.env.VITE_ENCRYPTION_KEY);
+const notes = reactive<Note[]>(decryptedData ? decryptedData : []);
 
 watchEffect(() => {
-  localStorage.setItem('notes', JSON.stringify(notes));
+   setEncryptedData<Note>('notes-encrypted',notes , import.meta.env.VITE_ENCRYPTION_KEY,)
 });
 
 const handleNote = (note: Note, operation: string) => {
@@ -117,7 +110,3 @@ const sortedNotes = computed(() => {
 });
 </script>
 
-
-<style>
-
-</style>
