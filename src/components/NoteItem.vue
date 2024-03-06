@@ -1,6 +1,6 @@
 <template>
   <div class="flex px-2 py-1 transition duration-300 hover:scale-105" v-show="note">
-    <div class="flex flex-col max-md:w-96 md:w-720 text-gray-700 dark:text-gray-100 bg-white dark:bg-slate-800 border hover:shadow-md bg-clip-border
+    <div class="flex flex-col max-md:w-96 md:w-720 text-gray-700 dark:text-gray-100 bg-white dark:bg-surat-500 border hover:shadow-md bg-clip-border
         dark:border-slate-200 rounded-xl px-4 py-5">
       <div class="flex  mb-2 flex justify-between">
         <div class="font-bold">

@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="flex items-center bg-gradient-to-r from-gray-400 via-gray-200 to-gray-300 text-gray-800 h-24 mb-5
-    dark:bg-gradient-to-r dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 dark:text-gray-200">
+    dark:bg-gradient-to-r dark:from-surat-900 dark:via-surat-500 dark:to-surat-900 dark:text-gray-200">
       <h1 class="flex text-3xl font-semibold tracking-tight ml-5 mr-5 custom-font">Surat</h1>
       <div class="flex items-center justify-center flex-grow">
         <div class="flex flex-col max-w-720 md:w-96 lg:w-720 max-lg:w-auto">

@@ -24,6 +24,13 @@ export default {
           default: '#1E1E1E',
           lighter: '#161B22',
           dark: '#0D1117',
+        },
+        'surat': {
+          100: '#e6e6e6',
+          300: '#393937',
+          400: '#32312F',
+          500: '#212121', 
+          900: '#171717', 
         }
       },
       typography: ({ theme }) => ({
@@ -50,7 +57,7 @@ export default {
       },
       width: {
         '720': '720px',
-      }, 
+      },
       maxWidth: {
         '720': '720px',
       },

@@ -30,7 +30,7 @@ function generateUniqueId() {
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-800 min-h-screen pb-2">
+  <div class="bg-white dark:bg-surat-500 min-h-screen pb-2">
     <RouterView />
   </div>
  

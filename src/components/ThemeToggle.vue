@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-const isDarkTheme = ref(true);
+const isDarkTheme = ref(false);
 defineProps(['modelValue']);
 const emits = defineEmits(['update:modelValue']);
 const toggleTheme = () => {
@@ -26,10 +26,10 @@ onMounted(() => {
     isDarkTheme.value = storedPreference === 'true';
     document.documentElement.classList.toggle('dark', isDarkTheme.value);
     emits('update:modelValue', isDarkTheme.value);
+  } else {
+    localStorage.setItem('theme', isDarkTheme.value.toString())
   }
 });
-
-
 </script>
 
 <style scoped></style>

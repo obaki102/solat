@@ -4,7 +4,7 @@
     <transition enter-active-class="transition-all duration-500 ease-out" enter-from-class="scale-75 opacity-0"
       enter-to-class="scale-100 opacity-100">
       <div v-show="modal.showModal"
-        class="w-11/12 lg:w-full max-w-3xl max-md:max-h-56 z-20 mx-auto bg-white dark:bg-slate-700  flex flex-col relative self-center shadow-2xl rounded-md ">
+        class="w-11/12 lg:w-full max-w-3xl max-md:max-h-56 z-20 mx-auto bg-white dark:bg-surat-300  flex flex-col relative self-center shadow-2xl dark:shadow-sm rounded-md ">
 
         <!-- Modal body -->
         <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight"/>
@@ -13,16 +13,16 @@
         <!-- Modal footer -->
         <div class="pb-4  pr-3  flex justify-end">
           <button @click="closeModal"
-            class="bg-blue-400 hover:bg-blue-500 dark:bg-slate-500 dark:hover:bg-slate-600 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">Close
+            class="bg-blue-400 hover:bg-blue-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">Close
           </button>
           <button @click="deleteNote" v-if="modal.isForEdit"
-            class="bg-red-400 hover:bg-red-500 dark:bg-slate-500 dark:hover:bg-slate-600 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
+            class="bg-red-400 hover:bg-red-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Delete Note</button>
           <button @click="addNote" v-if="!modal.isForEdit"
-            class="bg-green-400 hover:bg-green-500 dark:bg-slate-500 dark:hover:bg-slate-600 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
+            class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
           <button @click="editNote" v-if="modal.isForEdit"
-            class="bg-green-400 hover:bg-green-500 dark:bg-slate-500 dark:hover:bg-slate-600 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
+            class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Save Note</button>
         </div>
         <!-- ./Modal footer -->
