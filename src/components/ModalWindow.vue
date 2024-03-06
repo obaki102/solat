@@ -11,7 +11,8 @@
         <!-- ./Modal body -->
 
         <!-- Modal footer -->
-        <div class="pb-4  pr-3  flex justify-end">
+        <div class="w-auto border-b border-solid border-slate-100 mx-4"></div>
+        <div class="p-3 flex justify-end">
           <button @click="closeModal"
             class="bg-blue-400 hover:bg-blue-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">Close
           </button>
