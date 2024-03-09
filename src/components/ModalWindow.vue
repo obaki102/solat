@@ -23,11 +23,11 @@
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
           <button @click="downloadToPdf" v-if="modal.isForEdit" :class="{
-            'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !error,
+            'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !errorFlag,
             'cursor-not-allowed bg-gray-300 dark:bg-surat-800': loading,
-            'bg-red-500 hover:bg-red-600 dark:bg-surat-700 dark:hover:bg-surat-800': error
+            'bg-red-500 hover:bg-red-600 dark:bg-surat-700 dark:hover:bg-surat-800': errorFlag
           }" :disabled="loading">
-            <span v-if="!loading && !error">Download to PDF</span>
+            <span v-if="!loading && !errorFlag">Download to PDF</span>
             <span v-else-if="loading" class="text-sm p-2 rounded-md">
               Downloading...
             </span>
@@ -59,7 +59,7 @@ const { modal } = defineProps<{ modal: Modal }>();
 const modalVal = reactive<Modal>(modal);
 const noteContent = ref<string>(modal.note.content);
 const loading = ref(false);
-const error = ref(false);
+const errorFlag = ref(false);
 
 const emit = defineEmits(['closeModal', 'handleNote']);
 const addNote = () => {
@@ -117,11 +117,11 @@ const downloadToPdf = async () => {
       document.body.removeChild(downloadLink);
       URL.revokeObjectURL(pdfUrl);
     } else {
-      error.value = true;
+      errorFlag.value = true;
       console.error('Error converting HTML to PDF:', response.error.errorMessage);
     }
   } catch (error) {
-    error.value = true;
+    errorFlag.value = true;
     console.error('Error fetching data:', error);
   } finally {
     loading.value = false;
