@@ -23,15 +23,15 @@
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
           <button @click="downloadToPdf" v-if="modal.isForEdit" :class="{
-            'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !errorFlag,
-            'cursor-not-allowed bg-gray-300 dark:bg-surat-800': loading,
-            'bg-red-500 hover:bg-red-600 dark:bg-surat-700 dark:hover:bg-surat-800': errorFlag
-          }" :disabled="loading">
+                'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !errorFlag,
+                'cursor-not-allowed bg-green-400 dark:bg-surat-500 px-4 py-2 rounded-md text-white mr-2': loading,
+                'cursor-not-allowed bg-red-400  px-4 py-2 rounded-md text-white mr-2': errorFlag
+              }" :disabled="loading">
             <span v-if="!loading && !errorFlag">Download to PDF</span>
-            <span v-else-if="loading" class="text-sm p-2 rounded-md">
+            <span v-else-if="loading">
               Downloading...
             </span>
-            <span v-else class="text-sm text-red-500  p-2 rounded-md">
+            <span v-else>
               Error
             </span>
           </button>
@@ -96,13 +96,13 @@ const closeModal = () => {
 const downloadToPdf = async () => {
   loading.value = true; // Set loading state
 
-  const convertToPdfRequest:ConvertToPdfRequest = {
+  const convertToPdfRequest: ConvertToPdfRequest = {
     htmlContent: noteContent.value,
     fileName: `${generateUniqueId()}.pdf`
   };
 
   try {
-    const response:ConvertToPdfResponse = await convertHtmlToPdf(convertToPdfRequest);
+    const response: ConvertToPdfResponse = await convertHtmlToPdf(convertToPdfRequest);
 
     if (!response.error.isError) {
       const pdfUrl = URL.createObjectURL(response.file);
