@@ -5,6 +5,7 @@ export async function convertHtmlToPdf(request : ConvertToPdfRequest): Promise<C
   try {
     const response = await fetch(import.meta.env.VITE_CONVERT_TO_PDF, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },

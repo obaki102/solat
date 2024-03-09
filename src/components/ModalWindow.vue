@@ -22,9 +22,19 @@
           <button @click="addNote" v-if="!modal.isForEdit"
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
-            <button @click="downloadToPdf" v-if="modal.isForEdit"
-            class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
-            Downlaod to PDF</button>
+          <button @click="downloadToPdf" v-if="modal.isForEdit" :class="{
+            'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !error,
+            'cursor-not-allowed bg-gray-300 dark:bg-surat-800': loading,
+            'bg-red-500 hover:bg-red-600 dark:bg-surat-700 dark:hover:bg-surat-800': error
+          }" :disabled="loading">
+            <span v-if="!loading && !error">Download to PDF</span>
+            <span v-else-if="loading" class="text-sm p-2 rounded-md">
+              Downloading...
+            </span>
+            <span v-else class="text-sm text-red-500  p-2 rounded-md">
+              Error
+            </span>
+          </button>
           <button @click="editNote" v-if="modal.isForEdit"
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Save Note</button>
@@ -48,7 +58,8 @@ import { v4 as uuidv4 } from 'uuid';
 const { modal } = defineProps<{ modal: Modal }>();
 const modalVal = reactive<Modal>(modal);
 const noteContent = ref<string>(modal.note.content);
-
+const loading = ref(false);
+const error = ref(false);
 
 const emit = defineEmits(['closeModal', 'handleNote']);
 const addNote = () => {
@@ -83,27 +94,37 @@ const closeModal = () => {
 };
 
 const downloadToPdf = async () => {
-  const convertToPdfRequest: ConvertToPdfRequest = {
+  loading.value = true; // Set loading state
+
+  const convertToPdfRequest:ConvertToPdfRequest = {
     htmlContent: noteContent.value,
     fileName: `${generateUniqueId()}.pdf`
   };
 
-  const response = await convertHtmlToPdf(convertToPdfRequest) as ConvertToPdfResponse;
+  try {
+    const response:ConvertToPdfResponse = await convertHtmlToPdf(convertToPdfRequest);
 
-  if (!response.error.isError) {
-    const pdfUrl = URL.createObjectURL(response.file);
+    if (!response.error.isError) {
+      const pdfUrl = URL.createObjectURL(response.file);
 
-    const downloadLink = document.createElement('a');
-    downloadLink.href = pdfUrl;
-    downloadLink.download = convertToPdfRequest.fileName;
+      const downloadLink = document.createElement('a');
+      downloadLink.href = pdfUrl;
+      downloadLink.download = convertToPdfRequest.fileName;
 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
 
-    document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(pdfUrl);
-  } else {
-    console.error('Error converting HTML to PDF:', response.error.errorMessage);
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(pdfUrl);
+    } else {
+      error.value = true;
+      console.error('Error converting HTML to PDF:', response.error.errorMessage);
+    }
+  } catch (error) {
+    error.value = true;
+    console.error('Error fetching data:', error);
+  } finally {
+    loading.value = false;
   }
 };
 
