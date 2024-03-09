@@ -7,7 +7,7 @@
         class="w-11/12 lg:w-full max-w-3xl max-md:max-h-56 z-20 mx-auto bg-white dark:bg-surat-300  flex flex-col relative self-center shadow-2xl dark:shadow-sm rounded-md ">
 
         <!-- Modal body -->
-        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight"/>
+        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight" />
         <!-- ./Modal body -->
 
         <!-- Modal footer -->
@@ -22,6 +22,9 @@
           <button @click="addNote" v-if="!modal.isForEdit"
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
+            <button @click="downloadToPdf" v-if="modal.isForEdit"
+            class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
+            Downlaod to PDF</button>
           <button @click="editNote" v-if="modal.isForEdit"
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Save Note</button>
@@ -38,6 +41,8 @@ import TextEditorLight from '@/components/TextEditorLight.vue';
 import TextEditorDark from '@/components/TextEditorDark.vue';
 import type { Note } from '../types/note';
 import type { Modal } from '../types/modalType';
+import type { ConvertToPdfRequest, ConvertToPdfResponse } from '../types/convertToPdfType';
+import { convertHtmlToPdf } from '@/services/convertHtmlToPdf'
 import { v4 as uuidv4 } from 'uuid';
 
 const { modal } = defineProps<{ modal: Modal }>();
@@ -47,9 +52,8 @@ const noteContent = ref<string>(modal.note.content);
 
 const emit = defineEmits(['closeModal', 'handleNote']);
 const addNote = () => {
-  const uniqueId = uuidv4();
   const newNote: Note = {
-    id: uniqueId,
+    id: generateUniqueId(),
     date: new Date(),
     name: '',
     content: noteContent.value as string,
@@ -78,6 +82,35 @@ const closeModal = () => {
   noteContent.value = '';
 };
 
+const downloadToPdf = async () => {
+  const convertToPdfRequest: ConvertToPdfRequest = {
+    htmlContent: noteContent.value,
+    fileName: `${generateUniqueId()}.pdf`
+  };
+
+  const response = await convertHtmlToPdf(convertToPdfRequest) as ConvertToPdfResponse;
+
+  if (!response.error.isError) {
+    const pdfUrl = URL.createObjectURL(response.file);
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = pdfUrl;
+    downloadLink.download = convertToPdfRequest.fileName;
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(pdfUrl);
+  } else {
+    console.error('Error converting HTML to PDF:', response.error.errorMessage);
+  }
+};
+
+function generateUniqueId() {
+  return uuidv4();
+}
+
 </script>
 
 
@@ -94,4 +127,4 @@ const closeModal = () => {
   z-index: 50;
   overflow-y: auto;
 }
-</style>
+</style>../types/convertToPdfType
