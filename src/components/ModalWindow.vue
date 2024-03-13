@@ -135,11 +135,10 @@ function generateUniqueId() {
 .modal-overlay {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100%;
   width: 830px;
-  z-index: 50;
-  overflow-y: auto;
+  z-index: 99;
 }
 
 .container {
