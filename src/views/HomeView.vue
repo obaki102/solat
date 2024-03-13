@@ -5,7 +5,8 @@
       <h1 class="flex text-3xl font-semibold tracking-tight ml-5 mr-5 custom-font">Surat</h1>
       <div class="flex items-center justify-center flex-grow">
         <div class="flex flex-col max-w-720 md:w-96 lg:w-720 max-lg:w-auto">
-          <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden hover:shadow-md transition duration-300 hover:scale-105">
+          <div
+            class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden hover:shadow-md transition duration-300 hover:scale-105">
             <div class="grid place-items-center h-full w-12 text-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -21,7 +22,8 @@
       <div class="flex items-center justify-end p-2">
         <div>
           <button class="m-5 hover:scale-110" @click="openModal(false)">
-            <svg xmlns="http://www.w3.org/2000/svg" class="dark:fill-gray-200" height="30" width="30" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" class="dark:fill-gray-200" height="30" width="30"
+              viewBox="0 0 24 24">
               <title>Add Note</title>
               <path
                 d="M19 13C19.7 13 20.37 13.13 21 13.35V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H13.35C13.13 20.37 13 19.7 13 19C13 15.69 15.69 13 19 13M14 4.5L19.5 10H14V4.5M23 18V20H20V23H18V20H15V18H18V15H20V18H23Z" />
@@ -29,12 +31,12 @@
           </button>
         </div>
         <div>
-          <ThemeToggle v-model="isDarkTheme"/>
+          <ThemeToggle v-model="isDarkTheme" />
         </div>
       </div>
     </div>
-    <transition enter-active-class="transition-transform duration-500 ease-out" enter-from-class="scale-0 opacity-0"
-      enter-to-class="scale-100 opacity-100">
+    <transition enter-active-class="transition-transform duration-500 ease-out"
+      enter-from-class="translate-x-full opacity-0" enter-to-class="translate-x-0 opacity-100">
       <ModalWindow :modal="modal" @handleNote="handleNote" @closeModal="closeModal" :key="modal.id" />
     </transition>
     <div>
@@ -55,21 +57,21 @@ import { reactive, watchEffect, ref, computed } from 'vue';
 import type { Note } from '../types/note';
 import type { Modal } from '../types/modalType';
 import { v4 as uuidv4 } from 'uuid';
-import {getEncryptedData, setEncryptedData } from 'obaki-local-storage'
+import { getEncryptedData, setEncryptedData } from 'obaki-local-storage'
 const isDarkTheme = ref(false);
 const modal = reactive<Modal>({
   id: '',
   showModal: false,
   isForEdit: false,
-  isDarkTheme:isDarkTheme.value,
+  isDarkTheme: isDarkTheme.value,
   note: {} as Note
 });
 
-const decryptedData =  getEncryptedData<Note>('notes-encrypted', import.meta.env.VITE_ENCRYPTION_KEY);
+const decryptedData = getEncryptedData<Note>('notes-encrypted', import.meta.env.VITE_ENCRYPTION_KEY);
 const notes = reactive<Note[]>(decryptedData ? decryptedData : []);
 
 watchEffect(() => {
-   setEncryptedData<Note>('notes-encrypted',notes , import.meta.env.VITE_ENCRYPTION_KEY,)
+  setEncryptedData<Note>('notes-encrypted', notes, import.meta.env.VITE_ENCRYPTION_KEY,)
 });
 
 const handleNote = (note: Note, operation: string) => {
@@ -88,7 +90,7 @@ const handleNote = (note: Note, operation: string) => {
 const openModal = (isForEdit: boolean, noteForEdit?: Note) => {
   const uniqueId = uuidv4();
   modal.note = isForEdit ? noteForEdit || {} as Note : {} as Note;
-  modal.isForEdit =  isForEdit;
+  modal.isForEdit = isForEdit;
   modal.isDarkTheme = isDarkTheme.value;
   modal.showModal = true;
   modal.id = uniqueId;
@@ -109,4 +111,3 @@ const sortedNotes = computed(() => {
   return filteredNotes.value.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
 });
 </script>
-

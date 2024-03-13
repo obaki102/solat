@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col max-w-container bg-white bg-clip-border rounded-xl p-4">
+    <div class="flex flex-col max-w-container bg-white border-slate-200 rounded-xl p-4">
       <div v-if="editor"
         class="max-t-container buttons flex flex-wrap items-center gap-x-4 bg-white border border-slate-200 rounded-xl p-4 mb-2">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
@@ -120,7 +120,7 @@
           </svg>
         </button>
       </div>
-      <div class="max-w-container border-slate-200 rounded-xl p-2">
+      <div class="border-slate-200 rounded-xl p-2">
         <EditorContent :editor="editor" class="tiptap-light" />
       </div>
     </div>
@@ -183,18 +183,17 @@ onBeforeUnmount(() => {
 .tiptap-light .tiptap {
   max-width: 810px;
   margin: 0 auto;
-  min-height: 370px;
+  height: 860px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   color: #333;
   background-color: #FFF;
   font-size: 0.875rem;
-  max-height: 800px;
   /* You can adjust this value as needed */
   overflow-y: auto;
 }
 
 .max-w-container {
-  max-width: 830px;
+  min-width: 830px;
   min-height: 370px;
   height: 100%;
 }

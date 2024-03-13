@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col max-w-container bg-surat-300 bg-clip-border rounded-xl p-4">
+    <div class="flex flex-col max-w-container bg-surat-300 bg-clip-border p-4">
       <div v-if="editor"
         class="max-t-container buttons flex flex-wrap items-center gap-x-4 bg-surat-300 border border-slate-200 rounded-xl p-4 mb-2">
         <button @click="editor.chain().undo().run()" :disabled="!editor.can().chain().undo().run()"
@@ -138,7 +138,7 @@
           </svg>
         </button>
       </div>
-      <div class="max-w-container bg-surat-300 rounded-xl p-2">
+      <div class="bg-surat-300 rounded-xl p-2">
         <EditorContent :editor="editor" class="tiptap-dark" />
       </div>
     </div>
@@ -201,12 +201,11 @@ onBeforeUnmount(() => {
 .tiptap-dark .tiptap {
   max-width: 810px;
   margin: 0 auto;
-  min-height: 370px;
+  height: 860px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   color: #FFF !important;
   background-color: 393937;
   font-size: 0.875rem;
-  max-height: 800px;
   overflow-y: auto;
 
   h1,
@@ -244,7 +243,7 @@ onBeforeUnmount(() => {
 }
 
 .max-w-container {
-  max-width: 830px;
+  min-width: 830px;
   min-height: 370px;
   height: 100%;
 }

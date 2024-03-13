@@ -1,18 +1,14 @@
 <template>
-  <div v-if="modal.showModal" class="modal-overlay">
+  <div v-if="modal.showModal" class="modal-overlay flex justify-end border border-slate- dark:border-surat-300">
     <!-- Modal -->
-    <transition enter-active-class="transition-all duration-500 ease-out" enter-from-class="scale-75 opacity-0"
-      enter-to-class="scale-100 opacity-100">
       <div v-show="modal.showModal"
-        class="w-11/12 lg:w-full max-w-3xl max-md:max-h-56 z-20 mx-auto bg-white dark:bg-surat-300  flex flex-col relative self-center shadow-2xl dark:shadow-sm rounded-md ">
-
+        class="h-full container z-20 bg-white dark:bg-surat-300 flex flex-col relative shadow-2xl dark:shadow-sm">
         <!-- Modal body -->
-        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight" />
+        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight" class="flex-grow" />
         <!-- ./Modal body -->
 
         <!-- Modal footer -->
-        <div class="w-auto border-b border-solid border-slate-100 mx-4"></div>
-        <div class="p-3 flex justify-end">
+        <div class="p-3 flex justify-end bg-white dark:bg-surat-300">
           <button @click="closeModal"
             class="bg-blue-400 hover:bg-blue-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">Close
           </button>
@@ -23,10 +19,10 @@
             class="bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2">
             Add Note</button>
           <button @click="downloadToPdf" v-if="modal.isForEdit" :class="{
-                'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !errorFlag,
-                'cursor-not-allowed bg-green-400 dark:bg-surat-500 px-4 py-2 rounded-md text-white mr-2': loading,
-                'cursor-not-allowed bg-red-400  px-4 py-2 rounded-md text-white mr-2': errorFlag
-              }" :disabled="loading">
+          'bg-green-400 hover:bg-green-500 dark:bg-surat-500 dark:hover:bg-surat-900 focus:outline-none transition px-4 py-2 rounded-md text-white transition duration-500 ease-in-out mr-2': !loading && !errorFlag,
+          'cursor-not-allowed bg-green-400 dark:bg-surat-500 px-4 py-2 rounded-md text-white mr-2': loading,
+          'cursor-not-allowed bg-red-400  px-4 py-2 rounded-md text-white mr-2': errorFlag
+           }" :disabled="loading">
             <span v-if="!loading && !errorFlag">Download to PDF</span>
             <span v-else-if="loading">
               Downloading...
@@ -41,12 +37,12 @@
         </div>
         <!-- ./Modal footer -->
       </div>
-    </transition>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, reactive} from 'vue';
 import TextEditorLight from '@/components/TextEditorLight.vue';
 import TextEditorDark from '@/components/TextEditorDark.vue';
 import type { Note } from '../types/note';
@@ -61,6 +57,7 @@ const noteContent = ref<string>(modal.note.content);
 const loading = ref(false);
 const errorFlag = ref(false);
 
+
 const emit = defineEmits(['closeModal', 'handleNote']);
 const addNote = () => {
   const newNote: Note = {
@@ -72,7 +69,6 @@ const addNote = () => {
 
   emit('handleNote', newNote, 'add');
   closeModal();
-
 }
 
 const editNote = () => {
@@ -94,7 +90,7 @@ const closeModal = () => {
 };
 
 const downloadToPdf = async () => {
-  loading.value = true; // Set loading state
+  loading.value = true; 
 
   const convertToPdfRequest: ConvertToPdfRequest = {
     htmlContent: noteContent.value,
@@ -132,20 +128,21 @@ function generateUniqueId() {
   return uuidv4();
 }
 
-</script>
 
+</script>
 
 <style scoped>
 .modal-overlay {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 830px;
   z-index: 50;
   overflow-y: auto;
 }
-</style>../types/convertToPdfType
+
+.container {
+  width: 830px;
+}
+</style>
