@@ -183,7 +183,7 @@ onBeforeUnmount(() => {
 .tiptap-light .tiptap {
   max-width: 810px;
   margin: 0 auto;
-  height: 860px;
+  height: 850px;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   color: #333;
   background-color: #FFF;
