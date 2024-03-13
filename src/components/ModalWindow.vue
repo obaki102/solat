@@ -4,7 +4,7 @@
       <div v-show="modal.showModal"
         class="h-full container z-20 bg-white dark:bg-surat-300 flex flex-col relative shadow-2xl dark:shadow-sm">
         <!-- Modal body -->
-        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight" class="flex-grow" />
+        <component v-model="noteContent" :is="modal.isDarkTheme ? TextEditorDark : TextEditorLight" />
         <!-- ./Modal body -->
 
         <!-- Modal footer -->
