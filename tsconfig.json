@@ -10,7 +10,8 @@
     
   ],
   "compilerOptions": {
-    // other options...
+    "moduleResolution": "node",
     "types": ["@types/vue-material-design-icons"]
   },
+  
 }

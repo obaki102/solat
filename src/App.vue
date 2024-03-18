@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { getAnalytics, logEvent } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics"
 import { v4 as uuidv4 } from 'uuid';
+import { registerSW } from 'virtual:pwa-register'
+import { onMounted, ref } from 'vue';
 
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    // trigger a user prompt or just automatically
+    updateSW()
+  },
+  onOfflineReady() {
+    // show a ready to work offline to user
+  },
+})
 
 const analytics = getAnalytics();
-import { onMounted } from 'vue';
+
 
 onMounted(() => {
   let userId = localStorage.getItem('userId');

@@ -1,0 +1,20 @@
+{
+  "name": "Surat App",
+  "short_name": "Surat",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "A simple note-taking app using Tiptap for jotting down notes.",
+  "icons": [
+    {
+      "src": "/src/assets/logo.svg",
+      "sizes": "192x192",
+      "type": "image/svgg"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
